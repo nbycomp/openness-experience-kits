@@ -18,8 +18,8 @@
     - role: machine_setup/os_setup
     - role: time/ntp
       when: ntp_enable | default(False)
-    # - role: time/verify
-    #   when: "'edgenode_group' in group_names"
+    - role: time/verify
+      when: "'edgenode_group' in group_names"
     - role: machine_setup/custom_kernel
       when: not (kernel_skip | default(True))
     - role: machine_setup/grub
@@ -85,26 +85,28 @@
   roles:
     - role: rmd/node
       when: rmd_operator_enable | default(False)
-    # - role: opae_fpga/node
-    #   when: ne_opae_fpga_enable | default(False)
-    # - role: kubernetes/node
-    # - role: docker_registry/node
-    # - role: kubernetes/cni
-    # - role: telemetry/collectd/node
-    # - role: telemetry/cadvisor/node
-    # - role: openness/node
-    # - role: kubevirt/node
-    #   when: kubevirt_enable | default(True)
-    # - role: biosfw/node
-    #   when: ne_biosfw_enable | default(False)
-    # - role: cmk/node
-    #   when: ne_cmk_enable | default(False)
+
+    - role: opae_fpga/node
+      when: ne_opae_fpga_enable | default(False)
+    - role: kubernetes/node
+    - role: docker_registry/node
+    - role: kubernetes/cni
+    - role: telemetry/collectd/node
+    - role: telemetry/cadvisor/node
+    - role: openness/node
+    - role: kubevirt/node
+      when: kubevirt_enable | default(True)
+    - role: biosfw/node
+      when: ne_biosfw_enable | default(False)
+    - role: cmk/node
+      when: ne_cmk_enable | default(False)
     - role: hddl/network_edge/node
       when: ne_hddl_enable | default(False)
-    # - role: ptp/node
-    #   when: ptp_sync_enable | default(False)
-    # - role: telemetry/pcm/node
-    #   when: telemetry_pcm_enable | default(False)
+    - role: ptp/node
+      when: ptp_sync_enable | default(False)
+
+    - role: telemetry/pcm/node
+      when: telemetry_pcm_enable | default(False)
 
 # Play for edge nodes that have VCAC-A card installed
 - hosts: edgenode_vca_group

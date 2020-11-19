@@ -46,9 +46,9 @@ always_clean_repository: True
 
 ### Network Time Protocol (NTP)
 # Enable machine's time synchronization with NTP server
-ntp_enable: false
+ntp_enable: true
 # Servers to be used by NTP instead of the default ones (e.g. 0.centos.pool.ntp.org)
-ntp_servers: []
+ntp_servers: [0.centos.pool.ntp.org]
 
 ### Kernel, grub & tuned configuration
 # Kernel, grub & tuned configurations are machine-type specific:
